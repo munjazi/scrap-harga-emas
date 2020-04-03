@@ -15,18 +15,16 @@ sell=df1.replace("/gram", "").replace(".", "").strip()
 print(sell)
 
 d = {'Date':[], 'Sell': [], 'Buy Back': []}
-# iterate each quote
 d['Date'].append(dt.now().strftime('%Y-%m-%d'))
 d['Buy Back'].append(buy)
 d['Sell'].append(sell)
 
 emas_df = pd.DataFrame(d)
 
-df = pd.read_csv('hargaemassemar.csv'.format(dt.now().strftime('%Y')))
-df1 = pd.read_csv('hargaemassemar{}.csv'.format(dt.now().strftime('%Y')))
+df = pd.read_csv('hargaemassemar{}.csv'.format(dt.now().strftime('%Y')))
 df=df[['Date','Sell','Buy Back']]
 
-emas= df.append(df1).append(emas_df)
-print(emas)
+emas_df= df.append(emas_df)
+print(emas_df)
 
-emas.to_csv('hargaemassemar{}.csv'.format(dt.now().strftime('%Y')),index=False)
+emas_df.to_csv('hargaemassemar{}.csv'.format(dt.now().strftime('%Y')),index=False)
