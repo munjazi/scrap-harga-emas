@@ -1,4 +1,4 @@
-import requests, bs4
+import requests, bs4, os
 import pandas as pd
 from datetime import datetime as dt
 
@@ -21,10 +21,13 @@ d['Sell'].append(sell)
 
 emas_df = pd.DataFrame(d)
 
-df = pd.read_csv('hargaemassemar{}.csv'.format(dt.now().strftime('%Y')))
+filename = 'hargaemassemar{}.csv'
+abs_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
+
+df = pd.read_csv(abs_filename.format(dt.now().strftime('%Y')))
 df=df[['Date','Sell','Buy Back']]
 
 emas_df= df.append(emas_df)
 print(emas_df)
 
-emas_df.to_csv('hargaemassemar{}.csv'.format(dt.now().strftime('%Y')),index=False)
+emas_df.to_csv(abs_filename.format(dt.now().strftime('%Y')),index=False)
