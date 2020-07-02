@@ -24,10 +24,12 @@ emas_df = pd.DataFrame(d)
 filename = 'hargaemassemar{}.csv'
 abs_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
 
-df = pd.read_csv(abs_filename.format(dt.now().strftime('%Y')))
-df=df[['Date','Sell','Buy Back']]
-
-emas_df= df.append(emas_df)
+if dt.now().strftime('%d') == '01':
+	pass
+else:
+	df = pd.read_csv(abs_filename.format(dt.now().strftime('%Y%m')))
+	df=df[['Date','Sell','Buy Back']]
+	emas_df= df.append(emas_df)
 print(emas_df)
 
-emas_df.to_csv(abs_filename.format(dt.now().strftime('%Y')),index=False)
+emas_df.to_csv(abs_filename.format(dt.now().strftime('%Y%m')),index=False)
